@@ -41,8 +41,9 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
             
             Fornecedor tipo = negocio.consultar(Integer.parseInt(codigo));
                         
-            txtCodigo.setText(tipo.getIdentificador() + "");
-            txtNome.setText(tipo.getNome()+ "");
+            txtCodigo.setText(tipo.getid() + "");
+            txtCnpj.setText(tipo.getCnpj()+ "");
+            txtNome.setText(tipo.getCnpj()+ "");
             txtEndereco.setText(tipo.getEndereco());
             txtTelefone.setText(tipo.getTelefone()+ "");
             
@@ -102,9 +103,9 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nome");
 
-        jLabel3.setText("Endereco");
+        jLabel3.setText("Cnpj");
 
-        jLabel4.setText("Telefone");
+        jLabel4.setText("I.E");
 
         jLabel5.setText("Tipo Pessoa");
 
@@ -182,7 +183,7 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
                                 .addComponent(txtEndereco)
                                 .addComponent(txtTelefone)
                                 .addComponent(cbxTipoAssociado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,11 +205,11 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(cbxTipoAssociado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnExcluir)
@@ -341,11 +342,7 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
-    
-    
 
-    
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFechar;
