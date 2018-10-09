@@ -12,20 +12,32 @@ package entidade;
 public class CentroCusto {
     private int id;
     private String descricao;
-    private boolean status;
+    private int status;
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public boolean isStatus() {
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public int getStatus() {
         return status;
     }
-    
-    
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+      
     
 }

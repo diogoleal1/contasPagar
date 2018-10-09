@@ -21,7 +21,7 @@ public class Pessoa {
     private String endereco;
     private String telefone;
     private String email;
-    private boolean ativo;
+    private int ativo;
 
     public int getId() {
         return id;
@@ -87,11 +87,11 @@ public class Pessoa {
         this.email = email;
     }
 
-    public boolean isAtivo() {
+    public int getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(boolean ativo) {
+    public void setAtivo(int ativo) {
         this.ativo = ativo;
     }
     
