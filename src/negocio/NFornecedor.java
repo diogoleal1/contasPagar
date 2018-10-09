@@ -23,7 +23,7 @@ public class NFornecedor {
     }
     
     public void salvar(Fornecedor parametro) throws SQLException, Exception {
-        if(parametro.getNome().isEmpty()) throw new Exception ("Informar o nome do associado");
+        if(parametro.getNome().isEmpty()) throw new Exception ("Informar o nome do fornecedor");
         if(parametro.getCpf_Cnpj().isEmpty()) throw new Exception("Informar o cpf");
         if(parametro.getEndereco().isEmpty()) throw new Exception("Informar o endereco");
         if(parametro.getTelefone().isEmpty()) throw new Exception("Informar o telefone");

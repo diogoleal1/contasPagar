@@ -23,7 +23,7 @@ public class PCentroCusto {
      public void incluir(CentroCusto parametro) throws SQLException {
 
         String sql = " INSERT INTO "
-                   + " centro_custo (nome, status ) "
+                   + " centro_custo (descricao, status ) "
                    + " VALUES (?,1) ";
 
         Connection cnn = util.Conexao.getConexao();

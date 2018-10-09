@@ -93,8 +93,6 @@ public class TitulosPagar {
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-    
-    
+    }        
     
 }
