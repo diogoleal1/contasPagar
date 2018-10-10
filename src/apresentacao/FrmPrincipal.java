@@ -36,9 +36,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlPrincipal = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        mnuCadTipoAssociado = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        mnuCadCentroCusto = new javax.swing.JMenuItem();
+        mnuCadFornecedor = new javax.swing.JMenuItem();
+        mnuCadTitulo = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnuSair = new javax.swing.JMenuItem();
 
@@ -65,28 +65,34 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Cadastros");
 
-        mnuCadTipoAssociado.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
-        mnuCadTipoAssociado.setText("Tipo Associado");
-        mnuCadTipoAssociado.addActionListener(new java.awt.event.ActionListener() {
+        mnuCadCentroCusto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.CTRL_MASK));
+        mnuCadCentroCusto.setText("Centro Custo");
+        mnuCadCentroCusto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuCadTipoAssociadoActionPerformed(evt);
+                mnuCadCentroCustoActionPerformed(evt);
             }
         });
-        jMenu1.add(mnuCadTipoAssociado);
+        jMenu1.add(mnuCadCentroCusto);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem2.setText("Associado");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        mnuCadFornecedor.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_MASK));
+        mnuCadFornecedor.setText("Fornecedor");
+        mnuCadFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                mnuCadFornecedorActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(mnuCadFornecedor);
+
+        mnuCadTitulo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_MASK));
+        mnuCadTitulo.setText("Titulo a Pagar");
+        mnuCadTitulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCadTituloActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuCadTitulo);
 
         jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Relatórios");
-        jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Sair");
 
@@ -127,30 +133,34 @@ public class FrmPrincipal extends javax.swing.JFrame {
         sair();
     }//GEN-LAST:event_formWindowClosing
 
-    private void mnuCadTipoAssociadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadTipoAssociadoActionPerformed
+    private void mnuCadFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadFornecedorActionPerformed
         
         try {
     
-            /FrmCadTipoAssociado janela = new FrmCadTipoAssociado(pnlPrincipal);
+            FrmCadTipoAssociado janela = new FrmCadTipoAssociado(pnlPrincipal);
             pnlPrincipal.add(janela);
             janela.setVisible(true);
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-    }//GEN-LAST:event_mnuCadTipoAssociadoActionPerformed
+    }//GEN-LAST:event_mnuCadFornecedorActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void mnuCadCentroCustoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadCentroCustoActionPerformed
         // TODO add your handling code here:
         try {
-            FrmCadFornecedor janela = new FrmCadFornecedor(pnlPrincipal);
+            FrmCadCentroCusto janela = new FrmCadCentroCusto(pnlPrincipal);
             pnlPrincipal.add(janela);
             janela.setVisible(true);
             
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_mnuCadCentroCustoActionPerformed
+
+    private void mnuCadTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadTituloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_mnuCadTituloActionPerformed
 
     /**
      * @param args the command line arguments
@@ -190,12 +200,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem mnuCadTipoAssociado;
+    private javax.swing.JMenuItem mnuCadCentroCusto;
+    private javax.swing.JMenuItem mnuCadFornecedor;
+    private javax.swing.JMenuItem mnuCadTitulo;
     private javax.swing.JMenuItem mnuSair;
     private javax.swing.JDesktopPane pnlPrincipal;
     // End of variables declaration//GEN-END:variables
