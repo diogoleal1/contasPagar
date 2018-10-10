@@ -136,11 +136,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void mnuCadFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadFornecedorActionPerformed
         
         try {
-    
-            FrmCadTipoAssociado janela = new FrmCadTipoAssociado(pnlPrincipal);
+            FrmCadFornecedor janela = new FrmCadFornecedor(pnlPrincipal);
             pnlPrincipal.add(janela);
             janela.setVisible(true);
-            
+    
+        
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }

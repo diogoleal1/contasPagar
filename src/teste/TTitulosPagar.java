@@ -30,15 +30,18 @@ public class TTitulosPagar {
         }
 
         TitulosPagar tp = new TitulosPagar();
-        NTitulosPagar na = new NTitulosPagar();
+        NTitulosPagar ntp = new NTitulosPagar();
         try {
             if (opcao == 1) {
 
+     
+                
+                
                 //nome, cpf, endereco, telefone, email, ie, ativo
-                System.out.println("Informe o nome-> ");
-                tp.setNome(entrada.next());
-                System.out.println("Informe o cpf-> ");
-                tp.setCpf_Cnpj(entrada.next());
+                System.out.println("Informe a data de vencimento-> ");
+                tp.setDataVencimento(entrada.next());
+                System.out.println("Informe o valor-> ");
+                tp.setValor(entrada.next());
                 System.out.println("Informe o endereco-> ");
                 tp.setEndereco(entrada.next());
                 System.out.println("Informe o telefone-> ");
