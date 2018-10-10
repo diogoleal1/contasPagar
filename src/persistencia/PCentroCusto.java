@@ -24,13 +24,14 @@ public class PCentroCusto {
 
         String sql = " INSERT INTO "
                    + " centro_custo (descricao, status ) "
-                   + " VALUES (?,1) ";
+                   + " VALUES (?,?) ";
 
         Connection conexao = util.Conexao.getConexao();
 
         PreparedStatement prd = conexao.prepareStatement(sql);
 
         prd.setString(1, parametro.getDescricao());
+        prd.setInt(2, parametro.getStatus());
         
         prd.execute();
         conexao.close();
@@ -110,5 +111,6 @@ public class PCentroCusto {
 
         return retorno;
     }
+    
     
 }

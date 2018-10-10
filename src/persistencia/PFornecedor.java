@@ -24,7 +24,7 @@ public class PFornecedor {
 
         String sql = " INSERT INTO "
                 + " pessoa (nome, cpf, endereco, telefone, email, ie, ativo, dataCadastro ) "
-                + " VALUES (?,?,?,?,?,?,1,CURRENT_DATE) ";
+                + " VALUES (?,?,?,?,?,?,?,CURRENT_DATE) ";
 
         Connection conexao = util.Conexao.getConexao();
 
@@ -36,6 +36,7 @@ public class PFornecedor {
         prd.setString(4, parametro.getTelefone());
         prd.setString(5, parametro.getEmail());
         prd.setString(6, parametro.getIe());
+        prd.setInt(7, parametro.getAtivo());
 
         prd.execute();
         conexao.close();

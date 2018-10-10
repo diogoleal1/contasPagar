@@ -5,32 +5,35 @@
  */
 package apresentacao;
 
-import entidade.CentroCusto;
+
+import entidade.Fornecedor;
 import java.util.Vector;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import negocio.NCentroCusto;
+import negocio.NFornecedor;
+
 
 /**
  *
  * @author diogo
  */
-public class FrmPesCentroCusto extends javax.swing.JInternalFrame {
+public class FrmPesFornecedor extends javax.swing.JInternalFrame {
 
     JDesktopPane pnlPrincipal;
     /**
-     * Creates new form FrmPesCentroCusto
+     * Creates new form FrmPesFornecedor
      */
-    public FrmPesCentroCusto() {
+    public FrmPesFornecedor() {
         initComponents();
         carregarTabela();
     }
-    public FrmPesCentroCusto(JDesktopPane pnlPrincipal) {
+    
+     public FrmPesFornecedor(JDesktopPane pnlPrincipal) {
         this();
         this.pnlPrincipal = pnlPrincipal;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,41 +76,24 @@ public class FrmPesCentroCusto extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnFechar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFechar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnFechar)
-                .addContainerGap())
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tblResultadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResultadoMousePressed
-        try {
-            int linha = tblResultado.getSelectedRow();
-            String codigo = tblResultado.getValueAt(linha, 0).toString();
-
-            FrmCadCentroCusto janela = new FrmCadCentroCusto(pnlPrincipal,codigo);
-            pnlPrincipal.add(janela);
-            
-            janela.setVisible(true);
-            this.dispose();
-            
-            
-                
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-    }//GEN-LAST:event_tblResultadoMousePressed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         this.dispose();
@@ -117,21 +103,31 @@ public class FrmPesCentroCusto extends javax.swing.JInternalFrame {
         try {
             Vector<String> cabecalho = new Vector();
             cabecalho.add("Código");
-            cabecalho.add("Descrição");
+            cabecalho.add("Nome");
+            cabecalho.add("CPF");
+            cabecalho.add("Endereco");
+            cabecalho.add("Telefone");
+            cabecalho.add("Email");
+            cabecalho.add("Inscricao Estadual");
             cabecalho.add("Ativo");
             
-            NCentroCusto negocio = new NCentroCusto();
+            NFornecedor negocio = new NFornecedor();
             Vector linhas = new Vector();
             
             
-            for (CentroCusto cc : negocio.listar()) {
+            for (Fornecedor fornecedor : negocio.listar()) {
                 
                 Vector<String> detalhe = new Vector();
             
-                String status = cc.getStatus()==1?"Ativo":"Inativo";
+                String status = fornecedor.getAtivo()==1?"Sim":"Não";
                 
-                detalhe.add(cc.getId()+"");
-                detalhe.add(cc.getDescricao());
+                detalhe.add(fornecedor.getId()+"");
+                detalhe.add(fornecedor.getNome()+"");
+                detalhe.add(fornecedor.getCpf_Cnpj()+"");
+                detalhe.add(fornecedor.getEndereco()+"");
+                detalhe.add(fornecedor.getTelefone()+"");
+                detalhe.add(fornecedor.getEmail()+"");
+                detalhe.add(fornecedor.getIe()+"");
                 detalhe.add(status);
                 
                 linhas.add(detalhe);
@@ -144,6 +140,23 @@ public class FrmPesCentroCusto extends javax.swing.JInternalFrame {
         }
    
     }
+    
+    private void tblResultadoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblResultadoMousePressed
+         try {
+            int linha = tblResultado.getSelectedRow();
+            String codigo = tblResultado.getValueAt(linha, 0).toString();
+
+            FrmCadFornecedor janela = new FrmCadFornecedor(pnlPrincipal,codigo);
+            pnlPrincipal.add(janela);
+            
+            janela.setVisible(true);
+            this.dispose();   
+                
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_tblResultadoMousePressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFechar;

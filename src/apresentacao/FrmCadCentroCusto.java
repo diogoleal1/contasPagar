@@ -24,6 +24,7 @@ public class FrmCadCentroCusto extends javax.swing.JInternalFrame {
      */
     public FrmCadCentroCusto() {
         initComponents();
+        carregarCombo();
     }
 
     public FrmCadCentroCusto(JDesktopPane pnlPrincipal) {
@@ -45,8 +46,9 @@ public class FrmCadCentroCusto extends javax.swing.JInternalFrame {
             txtCodigo.setText(cc.getId() + "");
             txtDescricao.setText(cc.getDescricao());
             
+                       
             cmbSituacao.removeAllItems();   
-            cmbSituacao.addItem(cc.getStatus()+"");  
+            carregarCombo();
             
             btnExcluir.setEnabled(true);
 
@@ -121,9 +123,6 @@ public class FrmCadCentroCusto extends javax.swing.JInternalFrame {
 
         txtCodigo.setEnabled(false);
 
-        cmbSituacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ativo", "Inativo" }));
-        cmbSituacao.setEnabled(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,6 +189,7 @@ public class FrmCadCentroCusto extends javax.swing.JInternalFrame {
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         limpar();
+        btnExcluir.setEnabled(false);
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
@@ -198,8 +198,12 @@ public class FrmCadCentroCusto extends javax.swing.JInternalFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         try {
+            
             if (txtDescricao.getText().isEmpty()) {
                 throw new Exception("Informe a descricao");
+            }
+            if (cmbSituacao.getSelectedItem().equals("")) {
+                throw new Exception("Informe a situação do centro de custo");
             }
 
             CentroCusto cc = new CentroCusto();
@@ -208,8 +212,11 @@ public class FrmCadCentroCusto extends javax.swing.JInternalFrame {
                 cc.setId(Integer.parseInt(txtCodigo.getText()));
             }
 
+            String sit = (String) cmbSituacao.getSelectedItem();
+            
             cc.setDescricao(txtDescricao.getText());
-
+            cc.setStatus(sit.equals("Ativo")?1:0);
+                    
             NCentroCusto negocio = new NCentroCusto();
 
             negocio.salvar(cc);
@@ -217,7 +224,7 @@ public class FrmCadCentroCusto extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Operação efetuada com sucesso!");
 
             limpar();
-
+        
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -237,6 +244,7 @@ public class FrmCadCentroCusto extends javax.swing.JInternalFrame {
                 negocio.excluir(Integer.parseInt(txtCodigo.getText()));
                 JOptionPane.showMessageDialog(null, "Exclusão efetuado com Sucesso");
                 limpar();
+                btnExcluir.enable(false);
 
             }
 
@@ -261,7 +269,20 @@ public class FrmCadCentroCusto extends javax.swing.JInternalFrame {
     private void limpar() {
         txtCodigo.setText("");
         txtDescricao.setText("");
+        btnExcluir.setEnabled(false);
     }
+    
+    private void carregarCombo() {
+        try {
+             cmbSituacao.addItem("");
+             cmbSituacao.addItem("Ativo");
+             cmbSituacao.addItem("Inativo");
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;
