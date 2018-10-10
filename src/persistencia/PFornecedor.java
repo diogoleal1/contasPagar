@@ -26,9 +26,9 @@ public class PFornecedor {
                 + " pessoa (nome, cpf, endereco, telefone, email, ie, ativo, dataCadastro ) "
                 + " VALUES (?,?,?,?,?,?,1,CURRENT_DATE) ";
 
-        Connection cnn = util.Conexao.getConexao();
+        Connection conexao = util.Conexao.getConexao();
 
-        PreparedStatement prd = cnn.prepareStatement(sql);
+        PreparedStatement prd = conexao.prepareStatement(sql);
 
         prd.setString(1, parametro.getNome());
         prd.setString(2, parametro.getCpf_Cnpj());
@@ -38,7 +38,7 @@ public class PFornecedor {
         prd.setString(6, parametro.getIe());
 
         prd.execute();
-        cnn.close();
+        conexao.close();
     }
 
     public void alterar(Fornecedor parametro) throws SQLException {
@@ -107,8 +107,8 @@ public class PFornecedor {
 
         String sql = "SELECT * FROM pessoa";
 
-        Connection cnn = util.Conexao.getConexao();
-        Statement st = cnn.createStatement();
+        Connection conexao = util.Conexao.getConexao();
+        Statement st = conexao.createStatement();
 
         ResultSet rs = st.executeQuery(sql);
         List<Fornecedor> retorno = new ArrayList<Fornecedor>();

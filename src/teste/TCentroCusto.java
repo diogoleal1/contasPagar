@@ -9,7 +9,6 @@ import entidade.CentroCusto;
 import java.util.List;
 import java.util.Scanner;
 import negocio.NCentroCusto;
-import negocio.NFornecedor;
 
 /**
  *

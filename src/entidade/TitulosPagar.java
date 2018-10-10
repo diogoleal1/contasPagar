@@ -13,20 +13,39 @@ import java.util.Date;
  */
 public class TitulosPagar {
     private int id;
+    private Date dataCadastro;
     private Date dataVencimento;
     private double valor;
     private double juros;
     private double desconto;
     private double valorPago;
-    private boolean status;
-    
-    private CentroCusto centroCusto;
-    private Fornecedor fornecedor;
+    private String situacao;
 
+    private Fornecedor fornecedor;    
+    private CentroCusto centroCusto;
+
+
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+    
     public CentroCusto getCentroCusto() {
         return centroCusto;
     }
 
+      
     public void setCentroCusto(CentroCusto centroCusto) {
         this.centroCusto = centroCusto;
     }
@@ -87,12 +106,6 @@ public class TitulosPagar {
         this.valorPago = valorPago;
     }
 
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }        
+   
     
 }

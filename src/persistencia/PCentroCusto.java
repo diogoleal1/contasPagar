@@ -26,14 +26,14 @@ public class PCentroCusto {
                    + " centro_custo (descricao, status ) "
                    + " VALUES (?,1) ";
 
-        Connection cnn = util.Conexao.getConexao();
+        Connection conexao = util.Conexao.getConexao();
 
-        PreparedStatement prd = cnn.prepareStatement(sql);
+        PreparedStatement prd = conexao.prepareStatement(sql);
 
         prd.setString(1, parametro.getDescricao());
         
         prd.execute();
-        cnn.close();
+        conexao.close();
     }
 
     public void alterar(CentroCusto parametro) throws SQLException {
@@ -92,8 +92,8 @@ public class PCentroCusto {
 
         String sql = "SELECT * FROM centro_custo";
 
-        Connection cnn = util.Conexao.getConexao();
-        Statement st = cnn.createStatement();
+        Connection conexao = util.Conexao.getConexao();
+        Statement st = conexao.createStatement();
 
         ResultSet rs = st.executeQuery(sql);
         List<CentroCusto> retorno = new ArrayList<CentroCusto>();
