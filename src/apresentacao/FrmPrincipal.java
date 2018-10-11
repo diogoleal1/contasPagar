@@ -18,9 +18,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     public FrmPrincipal() {
         initComponents();
-        
+
         this.setExtendedState(MAXIMIZED_BOTH);
-        
+
     }
 
     /**
@@ -126,7 +126,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void mnuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSairActionPerformed
         // TODO add your handling code here:
         sair();
-        
+
     }//GEN-LAST:event_mnuSairActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -134,13 +134,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void mnuCadFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadFornecedorActionPerformed
-        
+
         try {
             FrmCadFornecedor janela = new FrmCadFornecedor(pnlPrincipal);
             pnlPrincipal.add(janela);
             janela.setVisible(true);
-    
-        
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -152,14 +151,22 @@ public class FrmPrincipal extends javax.swing.JFrame {
             FrmCadCentroCusto janela = new FrmCadCentroCusto(pnlPrincipal);
             pnlPrincipal.add(janela);
             janela.setVisible(true);
-            
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_mnuCadCentroCustoActionPerformed
 
     private void mnuCadTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCadTituloActionPerformed
-        // TODO add your handling code here:
+
+        try {
+            FrmCadTitulosPagar janela = new FrmCadTitulosPagar(pnlPrincipal);
+            pnlPrincipal.add(janela);
+            janela.setVisible(true);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }//GEN-LAST:event_mnuCadTituloActionPerformed
 
     /**
@@ -212,13 +219,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void sair() {
         try {
-            int resposta = JOptionPane.showConfirmDialog(null, "Confirma a saida do Sistema?","AppContasPagar",JOptionPane.YES_NO_OPTION);
-            if(resposta == JOptionPane.YES_OPTION){
+            int resposta = JOptionPane.showConfirmDialog(null, "Confirma a saida do Sistema?", "AppContasPagar", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {
                 System.exit(0);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-    
+
     }
 }

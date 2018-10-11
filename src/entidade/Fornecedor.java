@@ -11,6 +11,18 @@ package entidade;
  */
 public class Fornecedor extends Pessoa{
     
+    public Fornecedor(){
+        
+    }
+  
+    public Fornecedor(int id, String nome) {
+        this.id = id;
+        this.nome = nome;  
+    }
     
+    @Override
+    public String toString(){
+        return this.nome;
+    }
     
 }

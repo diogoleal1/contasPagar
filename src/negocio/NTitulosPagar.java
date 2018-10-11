@@ -23,7 +23,7 @@ public class NTitulosPagar {
     }
     
     public void salvar(TitulosPagar parametro) throws SQLException, Exception{
-        if(parametro.getFornecedor() == null) throw new Exception ("Informar o nome do associado");
+        if(parametro.getFornecedor() == null) throw new Exception ("Informar o nome do fornecedor");
         if(parametro.getCentroCusto() == null) throw new Exception ("Informar o nome do centro de custo");        
         if(parametro.getValor()<=0.0) throw new Exception("Informar o valor");
         if(parametro.getJuros()<=0.0) throw new Exception("Informar os juros");

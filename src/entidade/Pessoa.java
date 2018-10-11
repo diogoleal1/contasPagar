@@ -13,10 +13,10 @@ import java.util.Date;
  */
 public class Pessoa {
     
-    private int id;
+    protected int id;
     private String cpf_Cnpj;
     private String ie;
-    private String nome;
+    protected String nome;
     private Date dataCadastro;
     private String endereco;
     private String telefone;

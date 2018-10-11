@@ -13,6 +13,18 @@ public class CentroCusto {
     private int id;
     private String descricao;
     private int status;
+    
+    public CentroCusto(){}
+    
+    public CentroCusto(int id, String descricao) {
+        this.id = id;
+        this.descricao = descricao;  
+    }
+    
+    @Override
+    public String toString(){
+        return this.descricao;
+    }
 
     public int getId() {
         return id;
