@@ -77,7 +77,7 @@ public class FrmPesTitulosPagar extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnFechar)
@@ -119,7 +119,10 @@ public class FrmPesTitulosPagar extends javax.swing.JInternalFrame {
         try {
             Vector<String> cabecalho = new Vector();
             cabecalho.add("Código");
-            cabecalho.add("Data_Vencimento");
+            cabecalho.add("Fornecedor");
+            cabecalho.add("Centro de Custo");
+            cabecalho.add("Data de Cadastro");
+            cabecalho.add("Data Vencimento");
             cabecalho.add("Valor");
             cabecalho.add("Juros");
             cabecalho.add("Desconto");
@@ -127,14 +130,17 @@ public class FrmPesTitulosPagar extends javax.swing.JInternalFrame {
             NTitulosPagar negocio = new NTitulosPagar();
             Vector linhas = new Vector();
 
-            for (TitulosPagar cc : negocio.listar()) {
+            for (TitulosPagar tp : negocio.listar()) {
 
                 Vector<String> detalhe = new Vector();
-                detalhe.add(cc.getId() + "");
-                detalhe.add(new SimpleDateFormat("dd/MM/yyyy").format(new Date(System.currentTimeMillis())));
-                detalhe.add(String.valueOf(cc.getValor()));
-                detalhe.add(String.valueOf(cc.getJuros()));
-                detalhe.add(String.valueOf(cc.getDesconto()));
+                detalhe.add(tp.getId() + "");
+                detalhe.add(tp.getFornecedor().getNome()+ "");
+                detalhe.add(tp.getCentroCusto().getDescricao()+ "");
+                detalhe.add(tp.getDataCadastro());
+                detalhe.add(tp.getDataVencimento());                
+                detalhe.add(String.valueOf(tp.getValor()));
+                detalhe.add(String.valueOf(tp.getJuros()));
+                detalhe.add(String.valueOf(tp.getDesconto()));
 
                 linhas.add(detalhe);
 

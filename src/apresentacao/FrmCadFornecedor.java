@@ -7,9 +7,12 @@ package apresentacao;
 
 import entidade.Fornecedor;
 import java.sql.SQLException;
+import java.text.ParseException;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
 import negocio.NFornecedor;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -32,7 +35,7 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
         this.pnlPrincipal = pnlPrincipal;
     }
 
-    public FrmCadFornecedor(JDesktopPane pnlPrincipal, String codigo) {
+    public FrmCadFornecedor(JDesktopPane pnlPrincipal, String codigo) throws ParseException {
 
         this();
         this.pnlPrincipal = pnlPrincipal;
@@ -44,6 +47,15 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
             Fornecedor cc = negocio.consultar(Integer.parseInt(codigo));
 
             txtCodigo.setText(cc.getId() + "");
+            
+            switch (cc.getCpf_Cnpj().length()) {
+                case 14 : 
+                    txtCPF.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##.###.###/####-##")));                  
+                    break;
+                case 11 : 
+                    txtCPF.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("###.###.###-##")));
+                    break;
+            };
             txtCPF.setText(cc.getCpf_Cnpj());
             txtEmail.setText(cc.getEmail());
             txtEndereco.setText(cc.getEndereco());
@@ -83,7 +95,6 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
         txtCodigo = new javax.swing.JTextField();
         btnPesquisar = new javax.swing.JButton();
         txtNome = new javax.swing.JTextField();
-        txtCPF = new javax.swing.JTextField();
         txtEndereco = new javax.swing.JTextField();
         txtTelefone = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
@@ -93,6 +104,7 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
         btnExcluir = new javax.swing.JButton();
         btnLimpar = new javax.swing.JButton();
         btnFechar = new javax.swing.JButton();
+        txtCPF = new javax.swing.JFormattedTextField();
 
         jLabel1.setText("Código");
 
@@ -174,13 +186,14 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel3))
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                                        .addComponent(txtCPF))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                                        .addComponent(btnPesquisar))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnPesquisar))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(txtCPF)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
@@ -206,7 +219,7 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
                         .addComponent(btnLimpar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnFechar)))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +257,7 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(cmbAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnExcluir)
@@ -383,7 +396,7 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField txtCPF;
+    private javax.swing.JFormattedTextField txtCPF;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEndereco;

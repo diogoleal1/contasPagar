@@ -26,18 +26,17 @@ public class PTitulosPagar {
         String sql = " INSERT INTO "
                    + " titulo(id_fornecedor, id_centrocusto, valor, juros,"
                    + " desconto, dt_vencimento, dt_cadastro, situacao) "
-                   + " VALUES(?,?,?,?,?,?,current_date,'A') ";
+                   + " VALUES(?,?,?,?,?,to_date(?,'dd/mm/yyyy'),current_date,'A') ";
 
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement ps = cnn.prepareStatement(sql);
 
         ps.setInt(1, parametro.getFornecedor().getId());
-        ps.setInt(2, parametro.getFornecedor().getId());
+        ps.setInt(2, parametro.getCentroCusto().getId());
         ps.setDouble(3, parametro.getValor());
         ps.setDouble(4, parametro.getJuros());
         ps.setDouble(5, parametro.getDesconto());
-        ps.setDate(6, (Date) parametro.getDataCadastro());
-        ps.setDate(7, (Date) parametro.getDataVencimento());
+        ps.setString(6, parametro.getDataVencimento());
               
         ps.execute();
         cnn.close();      
@@ -47,7 +46,7 @@ public class PTitulosPagar {
    public void alterar(TitulosPagar parametro) throws SQLException {
         String sql = " UPDATE titulo  "
                    + " SET id_fornecedor = ?,  id_centrocusto = ?, valor = ?, juros = ?, "
-                   + " desconto = ?, dt_cadastro = ?, dt_vencimento = ?, situacao = ? "
+                   + " desconto = ?, dt_vencimento = to_date(?,'dd/mm/yyyy'), situacao = ? "
                    + " WHERE ID = ? ";
 
         Connection cnn = util.Conexao.getConexao();
@@ -58,8 +57,7 @@ public class PTitulosPagar {
         ps.setDouble(3, parametro.getValor());
         ps.setDouble(4, parametro.getJuros());
         ps.setDouble(5, parametro.getDesconto());
-        ps.setDate(6, (Date) parametro.getDataCadastro());
-        ps.setDate(7, (Date) parametro.getDataVencimento());
+        ps.setString(7, parametro.getDataVencimento());
         ps.setString(8, parametro.getSituacao());
         ps.setInt(9, parametro.getId());        
               
@@ -82,7 +80,7 @@ public class PTitulosPagar {
    
     public TitulosPagar consultar(int parametro) throws SQLException {
 
-        String sql = " SELECT id_fornecedor, id_centrocusto, valor, juros, desconto, dt_cadastro, dt_vencimento, situacao FROM titulo "
+        String sql = " SELECT id, id_fornecedor, id_centrocusto, valor, juros, desconto, dt_cadastro, dt_vencimento, situacao FROM titulo "
                    + " WHERE id = ?;";
 
         Connection conexao = util.Conexao.getConexao();
@@ -96,13 +94,13 @@ public class PTitulosPagar {
         if (rs.next()) {
             retorno.setId(rs.getInt("id"));
             retorno.setFornecedor(new PFornecedor().consultar(rs.getInt("id_fornecedor")));
-            retorno.setCentroCusto(new PCentroCusto().consultar(rs.getInt("id_idcentrocusto")));
+            retorno.setCentroCusto(new PCentroCusto().consultar(rs.getInt("id_centrocusto")));
             retorno.setValor(rs.getDouble("valor"));
             retorno.setJuros(rs.getDouble("juros"));
             retorno.setDesconto(rs.getDouble("desconto"));
-            retorno.setDataCadastro(rs.getDate("dt_cadastro"));
-            retorno.setDataVencimento(rs.getDate("dt_vencimento"));
-            retorno.setSituacao(rs.getString("situcao"));
+            retorno.setDataCadastro(rs.getString("dt_cadastro"));
+            retorno.setDataVencimento(rs.getString("dt_vencimento"));
+            retorno.setSituacao(rs.getString("situacao"));
         }
         return retorno;
     }
@@ -122,13 +120,13 @@ public class PTitulosPagar {
             
             titulo.setId(rs.getInt("id"));
             titulo.setFornecedor(new PFornecedor().consultar(rs.getInt("id_fornecedor")));
-            titulo.setCentroCusto(new PCentroCusto().consultar(rs.getInt("id_idcentrocusto")));
+            titulo.setCentroCusto(new PCentroCusto().consultar(rs.getInt("id_centrocusto")));
             titulo.setValor(rs.getDouble("valor"));
             titulo.setJuros(rs.getDouble("juros"));
             titulo.setDesconto(rs.getDouble("desconto"));
-            titulo.setDataCadastro(rs.getDate("dt_cadastro"));
-            titulo.setDataVencimento(rs.getDate("dt_vencimento"));
-            titulo.setSituacao(rs.getString("situcao"));
+            titulo.setDataCadastro(rs.getString("dt_cadastro"));
+            titulo.setDataVencimento(rs.getString("dt_vencimento"));
+            titulo.setSituacao(rs.getString("situacao"));
                    
             retorno.add(titulo);
         }

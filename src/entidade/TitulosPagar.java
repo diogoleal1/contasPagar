@@ -13,8 +13,8 @@ import java.util.Date;
  */
 public class TitulosPagar {
     private int id;
-    private Date dataCadastro;
-    private Date dataVencimento;
+    private String dataCadastro;
+    private String dataVencimento;
     private double valor;
     private double juros;
     private double desconto;
@@ -24,15 +24,17 @@ public class TitulosPagar {
     private Fornecedor fornecedor;    
     private CentroCusto centroCusto;
 
-
-
-    public Date getDataCadastro() {
+    public String getDataCadastro() {
         return dataCadastro;
     }
 
-    public void setDataCadastro(Date dataCadastro) {
+    public void setDataCadastro(String dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+
+
+
+  
     public String getSituacao() {
         return situacao;
     }
@@ -66,13 +68,15 @@ public class TitulosPagar {
         this.id = id;
     }
 
-    public Date getDataVencimento() {
+    public String getDataVencimento() {
         return dataVencimento;
     }
 
-    public void setDataVencimento(Date dataVencimento) {
+    public void setDataVencimento(String dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
+
+   
 
     public double getValor() {
         return valor;

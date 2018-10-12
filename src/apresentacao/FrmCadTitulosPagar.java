@@ -9,8 +9,12 @@ import entidade.CentroCusto;
 import entidade.Fornecedor;
 import entidade.TitulosPagar;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.TimeZone;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import negocio.NCentroCusto;
@@ -32,22 +36,30 @@ public class FrmCadTitulosPagar extends javax.swing.JInternalFrame {
         this.pnlPrincipal = pnlPrincipal;
     }
 
-    public FrmCadTitulosPagar(JDesktopPane pnlPrincipal, String codigo) {
+    public FrmCadTitulosPagar(JDesktopPane pnlPrincipal, String codigo) throws ParseException {
 
         this();
         this.pnlPrincipal = pnlPrincipal;
 
         //preencher a tela
         try {
-
+            
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyymmdd");
+            formatter.setTimeZone(TimeZone.getTimeZone("America/São Paulo"));
             NTitulosPagar negocio = new NTitulosPagar();
             TitulosPagar tp = negocio.consultar(Integer.parseInt(codigo));
-            txtCodigo.setText(tp.getId() + "");
-            txtDtVencimento.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(System.currentTimeMillis())));
+            
+            SimpleDateFormat format = new SimpleDateFormat("ddmmyyyy");
+            //String dateString = format.format( new Date()   );
+            Date   date       = format.parse ( formatter.format(formatter.parse(tp.getDataVencimento())) );   
+            
+            txtCodigo.setText(tp.getId()+ ""); 
+            txtDtVencimento.setText(date.toString());
             txtValor.setText(String.valueOf(tp.getValor()));
             txtJuros.setText(String.valueOf(tp.getJuros()));
             txtDesconto.setText(String.valueOf(tp.getDesconto()));
 
+            
             cmbFornecedor.removeAllItems();
             cmbCentroCusto.removeAllItems();
            // cmbSituacao.removeAllItems();
@@ -70,6 +82,13 @@ public class FrmCadTitulosPagar extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         txtDtVencimento = new javax.swing.JFormattedTextField();
+        try{
+            javax.swing.text.MaskFormatter data = new javax.swing.text.MaskFormatter("##/##/####");
+            txtDtVencimento = new javax.swing.JFormattedTextField(data);
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -278,13 +297,13 @@ public class FrmCadTitulosPagar extends javax.swing.JInternalFrame {
                 throw new Exception("Informe a data de vencimento");
             }
             if (txtValor.getText().isEmpty()) {
-                throw new Exception("Iforme um valor");
+                throw new Exception("Informe um valor");
             }
             if (txtJuros.getText().isEmpty()) {
-                throw new Exception("Iforme um valor de juros");
+                throw new Exception("Informe um valor de juros");
             }
             if (txtDesconto.getText().isEmpty()) {
-                throw new Exception("Iforme um valor de desconto");
+                throw new Exception("Informe um valor de desconto");
             }
             if (cmbCentroCusto.getSelectedItem().equals("")) {
                 throw new Exception("Informe o centro de custo");
@@ -301,15 +320,34 @@ public class FrmCadTitulosPagar extends javax.swing.JInternalFrame {
             if (!txtCodigo.getText().isEmpty()) {
                 tp.setId(Integer.parseInt(txtCodigo.getText()));
             }
+            
+            
+            String sit = (String) cmbSituacao.getSelectedItem();
+            //tratando data de vencimento
+            //SimpleDateFormat formato = new SimpleDateFormat("dd/mm/yyyy");
+            //Date data = formato.parse(txtDtVencimento.getText());
 
+            tp.setValor(Double.parseDouble(txtValor.getText()));
+            tp.setJuros(Double.parseDouble(txtJuros.getText()));
+            tp.setDesconto(Double.parseDouble(txtDesconto.getText()));
+            tp.setFornecedor((Fornecedor) cmbFornecedor.getSelectedItem());
+            tp.setCentroCusto((CentroCusto) cmbCentroCusto.getSelectedItem());
+            tp.setSituacao(sit.equals("Ativo")?"A":"B");
+            tp.setDataVencimento(txtDtVencimento.getText());
+            
+            
+            //id_fornecedor, id_centrocusto, valor, juros,desconto, dt_vencimento, situacao
+
+            /*
             String sit = (String) cmbSituacao.getSelectedItem();
             txtDtVencimento.setText(new SimpleDateFormat("dd/MM/yyyy").format(new Date(System.currentTimeMillis())));
             txtValor.setText(String.valueOf(tp.getValor()));
             txtJuros.setText(String.valueOf(tp.getJuros()));
             txtDesconto.setText(String.valueOf(tp.getDesconto()));
-            
+            tp.get
             //tp.setStatus(sit.equals("Ativo")?1:0);
 
+            */
             NTitulosPagar negocio = new NTitulosPagar();
 
             negocio.salvar(tp);
