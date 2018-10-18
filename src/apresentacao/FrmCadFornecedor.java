@@ -8,6 +8,8 @@ package apresentacao;
 import entidade.Fornecedor;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultFormatterFactory;
@@ -48,6 +50,7 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
 
             txtCodigo.setText(cc.getId() + "");
             
+            /*
             switch (cc.getCpf_Cnpj().length()) {
                 case 14 : 
                     txtCPF.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##.###.###/####-##")));                  
@@ -55,7 +58,9 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
                 case 11 : 
                     txtCPF.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("###.###.###-##")));
                     break;
+            
             };
+            */
             txtCPF.setText(cc.getCpf_Cnpj());
             txtEmail.setText(cc.getEmail());
             txtEndereco.setText(cc.getEndereco());
@@ -110,7 +115,7 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Nome");
 
-        jLabel3.setText("CPF");
+        jLabel3.setText("CPF/CNPJ");
 
         jLabel4.setText("Endereco");
 
@@ -171,7 +176,7 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -190,10 +195,10 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
                                         .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(btnPesquisar))
+                                    .addComponent(txtCPF)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(txtCPF)))
+                                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
@@ -213,13 +218,13 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btnSalvar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnExcluir)
-                        .addGap(18, 18, 18)
+                        .addGap(27, 27, 27)
                         .addComponent(btnLimpar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(26, 26, 26)
                         .addComponent(btnFechar)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,7 +262,7 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(cmbAtivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnExcluir)
@@ -273,16 +278,13 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
 
         try {
             if (txtCPF.getText().isEmpty()) {
-                throw new Exception("Informe o CPF");
+                throw new Exception("Informe o CPF ou o CNPJ");
             }
             if (txtEmail.getText().isEmpty()) {
                 throw new Exception("Informe o Email");
             }
             if (txtEndereco.getText().isEmpty()) {
                 throw new Exception("Informe o Endereco");
-            }
-            if (txtIe.getText().isEmpty()) {
-                throw new Exception("Informe a Inscrição Estadual");
             }
             if (txtNome.getText().isEmpty()) {
                 throw new Exception("Informe o Nome");
@@ -293,6 +295,10 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
             if (cmbAtivo.getSelectedItem().equals("")) {
                 throw new Exception("Informe a situação do fornecedor");
             }
+            if (txtCPF.getText().length() != 14 && txtCPF.getText().length() != 11) {
+                throw new Exception("O Campo CPF/CNPJ deverá ter: \n11 digitos para CPF ou 14 para CNPJ");
+            }
+            
 
             Fornecedor fornecedor = new Fornecedor();
 
@@ -332,8 +338,12 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnFecharActionPerformed
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        limpar();
-        // TODO add your handling code here:
+        try {
+            limpar();
+            // TODO add your handling code here:
+        } catch (ParseException ex) {
+            Logger.getLogger(FrmCadFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -341,7 +351,8 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
             FrmPesFornecedor janela = new FrmPesFornecedor(pnlPrincipal);
             pnlPrincipal.add(janela);
             janela.setVisible(true);
-
+            this.dispose();
+            
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
@@ -354,13 +365,12 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
                     "Confirma a exlusão do fornecedor?", "AppContas a Pagar",
                     JOptionPane.YES_NO_OPTION);
             if (resposta == JOptionPane.YES_OPTION) {
-
+                
                 NFornecedor negocio = new NFornecedor();
-
-                negocio.excluir(Integer.parseInt(txtCodigo.getText()));
-                JOptionPane.showMessageDialog(null, "Exclusão efetuado com Sucesso");
+                negocio.excluir(Integer.parseInt(txtCodigo.getText()));                
+                
                 limpar();
-                btnExcluir.enable(false);
+                btnExcluir.setEnabled(false);
 
             }
 
@@ -369,7 +379,7 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
-    private void limpar() {
+    private void limpar() throws ParseException {
         txtCPF.setText("");
         txtEmail.setText("");
         txtEndereco.setText("");
@@ -377,6 +387,7 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
         txtNome.setText("");
         txtTelefone.setText("");
         txtCodigo.setText("");
+        //txtCPF.setFormatterFactory(new DefaultFormatterFactory(new MaskFormatter("##############")));  
 
         btnExcluir.setEnabled(false);
     }

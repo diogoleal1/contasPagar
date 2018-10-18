@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -66,15 +67,25 @@ public class PFornecedor {
     }
 
     public void excluir(int parametro) throws SQLException {
-
-        String sql = " DELETE FROM pessoa "
+        try {
+            //verificar se o fornecedor possui título
+            PTitulosPagar ptp = new PTitulosPagar();
+            boolean fTitulo = ptp.fornecedorTitulo(parametro);
+            if (fTitulo) {throw new Exception("Fornecedor com título vinculado \nNão é possível excluir apenas desativar!");}
+            /////////////////////////////////////////
+            
+            String sql = " DELETE FROM pessoa "
                     + " WHERE id = ?;";
 
-        Connection conexao = util.Conexao.getConexao();
-        PreparedStatement prd = conexao.prepareStatement(sql);
-        prd.setInt(1, parametro);
-        prd.execute();
-        conexao.close();
+            Connection conexao = util.Conexao.getConexao();
+            PreparedStatement prd = conexao.prepareStatement(sql);
+            prd.setInt(1, parametro);
+            prd.execute();
+            conexao.close();
+            JOptionPane.showMessageDialog(null, "Exclusão efetuado com Sucesso");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }       
     }
 
     public Fornecedor consultar(int parametro) throws SQLException {
@@ -106,7 +117,7 @@ public class PFornecedor {
 
     public List<Fornecedor> listar() throws SQLException {
 
-        String sql = "SELECT * FROM pessoa";
+        String sql = "SELECT * FROM pessoa ORDER BY id";
 
         Connection conexao = util.Conexao.getConexao();
         Statement st = conexao.createStatement();

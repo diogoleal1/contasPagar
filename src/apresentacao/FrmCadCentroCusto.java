@@ -242,9 +242,9 @@ public class FrmCadCentroCusto extends javax.swing.JInternalFrame {
                 NCentroCusto negocio = new NCentroCusto();
 
                 negocio.excluir(Integer.parseInt(txtCodigo.getText()));
-                JOptionPane.showMessageDialog(null, "Exclusão efetuado com Sucesso");
+                
                 limpar();
-                btnExcluir.enable(false);
+                btnExcluir.setEnabled(false);
 
             }
 
@@ -259,6 +259,7 @@ public class FrmCadCentroCusto extends javax.swing.JInternalFrame {
             FrmPesCentroCusto janela = new FrmPesCentroCusto(pnlPrincipal);
             pnlPrincipal.add(janela);
             janela.setVisible(true);
+            this.dispose();
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());

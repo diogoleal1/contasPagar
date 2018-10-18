@@ -28,8 +28,7 @@ public class NFornecedor {
         if(parametro.getEndereco().isEmpty()) throw new Exception("Informar o endereco");
         if(parametro.getTelefone().isEmpty()) throw new Exception("Informar o telefone");
         if(parametro.getEmail().isEmpty()) throw new Exception("Informar o email");
-        if(parametro.getIe().isEmpty()) throw new Exception("Informar o IE");
-        
+                
         if(parametro.getId() == 0){
             persistencia.incluir(parametro);
         }else{
