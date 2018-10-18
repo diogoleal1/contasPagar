@@ -46,20 +46,19 @@ public class PTitulosPagar {
     public void alterar(TitulosPagar parametro) throws SQLException {
         String sql = " UPDATE titulo  "
                 + " SET id_fornecedor = ?,  id_centrocusto = ?, valor = ?, juros = ?, "
-                + " desconto = ?, dt_vencimento = to_date(?,'dd/mm/yyyy'), situacao = ? "
+                + " desconto = ?, dt_vencimento = to_date(?,'dd/mm/yyyy'), situacao = 'A' "
                 + " WHERE ID = ? ";
 
         Connection cnn = util.Conexao.getConexao();
         PreparedStatement ps = cnn.prepareStatement(sql);
 
         ps.setInt(1, parametro.getFornecedor().getId());
-        ps.setInt(2, parametro.getFornecedor().getId());
+        ps.setInt(2, parametro.getCentroCusto().getId());
         ps.setDouble(3, parametro.getValor());
         ps.setDouble(4, parametro.getJuros());
         ps.setDouble(5, parametro.getDesconto());
-        ps.setString(7, parametro.getDataVencimento());
-        ps.setString(8, parametro.getSituacao());
-        ps.setInt(9, parametro.getId());
+        ps.setString(6, parametro.getDataVencimento());
+        ps.setInt(7, parametro.getId());
 
         ps.execute();
         cnn.close();

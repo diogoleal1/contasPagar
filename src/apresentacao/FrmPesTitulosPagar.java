@@ -126,6 +126,7 @@ public class FrmPesTitulosPagar extends javax.swing.JInternalFrame {
             cabecalho.add("Valor");
             cabecalho.add("Juros");
             cabecalho.add("Desconto");
+            cabecalho.add("Situacao");
 
             NTitulosPagar negocio = new NTitulosPagar();
             Vector linhas = new Vector();
@@ -133,6 +134,8 @@ public class FrmPesTitulosPagar extends javax.swing.JInternalFrame {
             for (TitulosPagar tp : negocio.listar()) {
 
                 Vector<String> detalhe = new Vector();
+                String status = (tp.getSituacao().equals("A") ? "Aberto" : "Baixado");
+                
                 detalhe.add(tp.getId() + "");
                 detalhe.add(tp.getFornecedor().getNome()+ "");
                 detalhe.add(tp.getCentroCusto().getDescricao()+ "");
@@ -141,6 +144,7 @@ public class FrmPesTitulosPagar extends javax.swing.JInternalFrame {
                 detalhe.add(String.valueOf(tp.getValor()));
                 detalhe.add(String.valueOf(tp.getJuros()));
                 detalhe.add(String.valueOf(tp.getDesconto()));
+                detalhe.add(status);
 
                 linhas.add(detalhe);
 

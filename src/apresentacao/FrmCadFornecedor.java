@@ -329,10 +329,6 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void cmbAtivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAtivoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cmbAtivoActionPerformed
-
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnFecharActionPerformed
@@ -378,6 +374,10 @@ public class FrmCadFornecedor extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void cmbAtivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAtivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbAtivoActionPerformed
 
     private void limpar() throws ParseException {
         txtCPF.setText("");
